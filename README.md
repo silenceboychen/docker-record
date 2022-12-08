@@ -1,5 +1,16 @@
 # docker操作记录
 
+## 不加sudo执行docker
+
+```
+$ 不加 sudo 执行 Docker 命令
+```
+
+## docker删除无用镜像
+
+```
+$ docker rmi $(docker images --filter "dangling=true" -q --no-trunc)
+```
 ## docker-compose启动zookeeper和kafka
 
 ```
@@ -29,4 +40,21 @@ $ docker run -d -p 3306:3306 --name mysql --restart=always -v /var/mysql/data:/v
 
 ```
 $ docker run -d -p 6379:6379 --name redis --restart=always redis
+
+// 设置密码
+$ docker run -d --name myredis -p 6379:6379 redis --requirepass "mypassword"
+```
+
+## docker启动gitlab
+
+```
+docker run --detach \
+  --hostname gitlab.demo.com \
+  --publish 8443:443 --publish 8880:80 --publish 8222:22 \
+  --name gitlab \
+  --restart always \
+  --volume /srv/gitlab/config:/etc/gitlab \
+  --volume /srv/gitlab/logs:/var/log/gitlab \
+  --volume /srv/gitlab/data:/var/opt/gitlab \
+  gitlab/gitlab-ce:latest
 ```
