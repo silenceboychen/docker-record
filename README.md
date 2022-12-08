@@ -58,3 +58,15 @@ docker run --detach \
   --volume /srv/gitlab/data:/var/opt/gitlab \
   gitlab/gitlab-ce:latest
 ```
+
+## docker搭建翻墙工具
+
+```
+$ docker run -d \
+    --restart=always \
+    --privileged \
+    --network=host \
+    --name v2raya \
+    -v /etc/v2raya:/etc/v2raya \
+    mzz2017/v2raya
+```
